@@ -7,7 +7,19 @@ This is Amazing Block Title!!! =^_^=
 {% block content %}
 Welcome to TweetMe2
 
+<div id = 'tweets'>
+    Replace me
+</div>
+
 <script>
+    const tweetsElement = document.getElementById('tweets') // We will get html element
+    tweetsElement.innerHTML = "Loading.... Please wait. <br> Hm... You might enjoy some tea :)" // we will set html in that element
+    
+    var el1 = "<h2> Hi there Monday </h2>"
+    var el2 = "<h2> Hi there Lundi </h2>"
+    var el3 = "<h2> Hi there Lunedi </h2>"
+    tweetsElement.innerHTML = el1 + el2 + el3
+
     const xhr = new XMLHttpRequest() // xhr = SomeClass()
     const method = 'GET' // POST
     const url = "/tweets"    
