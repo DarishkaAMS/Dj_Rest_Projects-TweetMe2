@@ -8,10 +8,23 @@ def home_view(request, *args, **kwargs):
     # return HttpResponse("<h1>Hello World</h1>")
     return render(request, "tweets/home.html", context={}, status=200)
 
+def tweet_list_view(request, *args, **kwargs):
+    """
+    REST API VIEW
+    Consume by JavaScript or Swift/Java/iOS/Android
+    return json data
+    """
+    query_set = Tweet.objects.all()    
+    tweets_list = [{"id": qs.id, "content": qs.content} for qs in query_set] 
+    data = {
+        "response": tweets_list
+    }
+    return JsonResponse(data)
+
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     """
     REST API VIEW
-    COnsume by JavaScript or Swift/Java/iOS/Android
+    Consume by JavaScript or Swift/Java/iOS/Android
     return json data
     """
     data = {
