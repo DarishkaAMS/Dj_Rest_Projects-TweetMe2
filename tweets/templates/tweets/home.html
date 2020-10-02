@@ -5,9 +5,14 @@ This is Amazing Block Title!!! =^_^=
 {% endblock %}
 
 {% block content %}
-Welcome to TweetMe2
 
-<div id = 'tweets'>
+<div class='row text-center'>
+    <div class='col'>
+        <h2> Welcome to TweetMe2 </h2>
+    </div>
+</div>
+
+<div class='row' id = 'tweets'>
     Loading.... Please wait. <br> Hm... You might enjoy some tea :)
 </div>
 
@@ -35,7 +40,7 @@ Welcome to TweetMe2
     } 
 
     function formatTweetElement(tweet) {
-        var formattedTweet = "<div class='mb-4 tweet' id='tweet-" + tweet.id 
+        var formattedTweet = "<div class='col-12 col-md-10 mx-auto border-bottom py-3 mb-4 tweet' id='tweet-" + tweet.id 
         + "'><p>" + tweet.content + 
         "</p><div class='btn-group'>" + likeBtn(tweet) + "</div></div>"
         return formattedTweet

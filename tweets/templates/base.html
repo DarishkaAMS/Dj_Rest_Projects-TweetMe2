@@ -3,13 +3,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>TweetMe2 {% block head_title %} {% endblock %}</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <style>
+            .bg-tweetme {
+                background-color: #0969c8!important;
+            }
+        </style>
+        <title>TweetMe2 {% block head_title %} {% endblock %}</title>        
     </head>
     <body>
-        {% block content %}
-        {% endblock content %}
+        {% include "components/navbar.html" %}    
+        <div class='conteiner'>
+            {% block content %}
+            {% endblock content %}
+        </div>
         <!-- DRY Don't Repeat YourSelf-->
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
