@@ -5,7 +5,8 @@ from .models import Tweet
 
 
 def home_view(request, *args, **kwargs):
-    return HttpResponse('<h1>Hello</h1>')
+    # return HttpResponse('<h1>Hello</h1>')
+    return render(request, 'pages/home.html', context={}, status=200)
 
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
@@ -24,7 +25,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
         obj = Tweet.objects.get(id=tweet_id)
         data['content'] = obj.content
     except:
-        data['message'] = 'Sorry it is not found'
+        data['message'] = 'Sorry this page is not found'
         status = 404
         # raise Http404
     return JsonResponse(data, status=status)  # json.dumps content_type='application/json'
