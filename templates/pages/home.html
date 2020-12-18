@@ -3,7 +3,7 @@
 {% block head_title %} Amazing {% endblock head_title %}
 
 {% block content %}
-<div class="text-center">
+<div class="text-center" >
     <div class="col>">
         <h2> Welcome to TweetMe2 </h2>
     </div>
@@ -30,7 +30,7 @@
     }
 
     function formatTweetElement(tweet){
-        var formattedTweet = "<div class='col-12 border-bottom py-3 mb-4 tweet' id='tweet-" + tweet.id
+        var formattedTweet = "<div class='col-12 col-md-10 mx-auto border-bottom rounded py-3 mb-4 tweet' id='tweet-" + tweet.id
          + "'><p>" + tweet.content +
          "</p><div class='btn-group'>" + likeBtn(tweet) + "</div></div>"
         return formattedTweet
