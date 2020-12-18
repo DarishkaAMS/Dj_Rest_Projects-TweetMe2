@@ -16,6 +16,10 @@ Welcome to TweetMe2
     const url = '/tweets'
     const responseType = 'json'
 
+    function formatTweetElement(tweet){
+        var formattedTweet = "<div class='mb-4'><h2>" + tweet.id +"</h2>" + "<p>" + tweet.content +"</p></div>"
+        return formattedTweet
+    }
     xhr.responseType = responseType
     xhr.open(method, url)
     xhr.onload = function() {
@@ -24,9 +28,8 @@ Welcome to TweetMe2
         var finalVarStr = ""
         var i;
         for (i=0; i<listedItems.length; i++){
-            console.log(i)
-            console.log(listedItems[i])
-            var currentItem = "<div class='mb-4'><h2>" + listedItems[i].id +"</h2>" + "<p>" + listedItems[i].content +"</p></div>"
+            var tweetObj = listedItems[i]
+            var currentItem = formatTweetElement(tweetObj)
             finalVarStr += currentItem
         }
         tweetsElement.innerHTML = finalVarStr
