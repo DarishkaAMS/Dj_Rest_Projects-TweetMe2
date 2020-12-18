@@ -17,7 +17,7 @@ Welcome to TweetMe2
     const responseType = 'json'
 
     function formatTweetElement(tweet){
-        var formattedTweet = "<div class='mb-4'><h2>" + tweet.id +"</h2>" + "<p>" + tweet.content +"</p></div>"
+        var formattedTweet = "<div class='mb-4 tweet' id='tweet-" + tweet.id + "'><p>" + tweet.content +"</p></div>"
         return formattedTweet
     }
     xhr.responseType = responseType
