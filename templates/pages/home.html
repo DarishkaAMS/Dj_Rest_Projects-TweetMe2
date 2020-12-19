@@ -28,7 +28,8 @@
 
     function handleTweetCreateFormDidSubmit(event) {
         event.preventDefault()
-        console.log(event)
+        const myForm = event.target
+        const myFormData = new FormData(myForm)
     }
 
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
