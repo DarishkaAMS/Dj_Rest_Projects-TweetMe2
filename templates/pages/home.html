@@ -39,7 +39,7 @@
 
         xhr.onload = function() {
             const serverResponse = xhr.response
-            // console.log(serverResponse)
+            console.log(xhr.status, serverResponse)
             const tweetsEl = document.getElementById('tweets')
             loadTweets(tweetsEl)
         }
