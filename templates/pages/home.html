@@ -30,6 +30,9 @@
         event.preventDefault()
         const myForm = event.target
         const myFormData = new FormData(myForm)
+        const url = myForm.getAttribute("action")
+        const method = myForm.getAttribute("method")
+        console.log(endpoint, method)
     }
 
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
