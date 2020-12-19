@@ -27,7 +27,7 @@
 <script>
     const tweetsEl = document.getElementById('tweets') // get an html element
 
-    function loadTweets(){
+    function loadTweets(tweetsElement){
         const xhr = new XMLHttpRequest() // xhr = SomeClass()
         const method = 'GET' // 'POST'
         const url = '/tweets'
@@ -50,6 +50,8 @@
         }
         xhr.send()
     }
+
+    loadTweets(tweetsEl)
 
     function handleDidLike(tweet_id, currentCount){
         console.log(tweet_id, currentCount)
