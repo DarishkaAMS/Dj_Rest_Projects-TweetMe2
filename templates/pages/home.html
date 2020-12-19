@@ -25,8 +25,14 @@
 </div>
 
 <script>
+
+    function handleTweetCreateFormDidSubmit(event) {
+        event.preventDefault()
+        console.log(event)
+    }
+
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
-    tweetCreateFormEl.addEventListener("submit")
+    tweetCreateFormEl.addEventListener("submit", handleTweetCreateFormDidSubmit)
 
     const tweetsEl = document.getElementById('tweets') // get an html element
 
