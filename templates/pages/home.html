@@ -38,11 +38,10 @@
             const serverResponse = xhr.response
             // console.log(serverResponse)
             const tweetsEl = document.getElementById('tweets')
-            loadTweets()
+            loadTweets(tweetsEl)
         }
         xhr.send(myFormData)
     }
-
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
     tweetCreateFormEl.addEventListener("submit", handleTweetCreateFormDidSubmit)
 
@@ -59,14 +58,14 @@
         xhr.onload = function() {
             const serverResponse = xhr.response
             const listedItems = serverResponse.response
-            var finalVarStr = ""
+            var finalTweetStr = ""
             var i;
             for (i=0; i<listedItems.length; i++){
                 var tweetObj = listedItems[i]
                 var currentItem = formatTweetElement(tweetObj)
-                finalVarStr += currentItem
+                finalTweetStr += currentItem
             }
-            tweetsElement.innerHTML = finalVarStr
+            tweetsElement.innerHTML = finalTweetStr
             // console.log(listedItems)
         }
         xhr.send()
