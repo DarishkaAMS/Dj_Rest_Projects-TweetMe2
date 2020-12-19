@@ -32,7 +32,15 @@
         const myFormData = new FormData(myForm)
         const url = myForm.getAttribute("action")
         const method = myForm.getAttribute("method")
-        console.log(endpoint, method)
+        const xhr = new XMLHttpRequest()
+        xhr.open(method, url)
+        xhr.onload = function() {
+            const serverResponse = xhr.response
+            // console.log(serverResponse)
+            const tweetsEl = document.getElementById('tweets')
+            loadTweets()
+        }
+        xhr.send(myFormData)
     }
 
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
