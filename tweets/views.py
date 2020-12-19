@@ -12,6 +12,7 @@ def home_view(request, *args, **kwargs):
 
 def tweet_create_view(request, *args, **kwargs):
     form = TweetForm(request.POST or None)
+    print('post data is', request.POST)
     if form.is_valid():
         obj = form.save(commit=False)
         obj.save()
@@ -19,7 +20,7 @@ def tweet_create_view(request, *args, **kwargs):
     return render(request, 'components/form.html', context={'form': form})
 
 
-def tweet_list_view(request, *args, **kwargd):
+def tweet_list_view(request, *args, **kwargs):
     """
     REST API VIEW
     Consume by JavaScript or Swift or Java/iOS/Android
