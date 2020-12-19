@@ -25,11 +25,31 @@
 </div>
 
 <script>
-    const tweetsElement = document.getElementById('tweets') // get an html element
-    const xhr = new XMLHttpRequest() // xhr = SomeClass()
-    const method = 'GET' // 'POST'
-    const url = '/tweets'
-    const responseType = 'json'
+    const tweetsEl = document.getElementById('tweets') // get an html element
+
+    function loadTweets(){
+        const xhr = new XMLHttpRequest() // xhr = SomeClass()
+        const method = 'GET' // 'POST'
+        const url = '/tweets'
+        const responseType = 'json'
+
+        xhr.responseType = responseType
+        xhr.open(method, url)
+        xhr.onload = function() {
+            const serverResponse = xhr.response
+            const listedItems = serverResponse.response
+            var finalVarStr = ""
+            var i;
+            for (i=0; i<listedItems.length; i++){
+                var tweetObj = listedItems[i]
+                var currentItem = formatTweetElement(tweetObj)
+                finalVarStr += currentItem
+            }
+            tweetsElement.innerHTML = finalVarStr
+            // console.log(listedItems)
+        }
+        xhr.send()
+    }
 
     function handleDidLike(tweet_id, currentCount){
         console.log(tweet_id, currentCount)
@@ -47,22 +67,7 @@
          "</p><div class='btn-group'>" + likeBtn(tweet) + "</div></div>"
         return formattedTweet
     }
-    xhr.responseType = responseType
-    xhr.open(method, url)
-    xhr.onload = function() {
-        const serverResponse = xhr.response
-        const listedItems = serverResponse.response
-        var finalVarStr = ""
-        var i;
-        for (i=0; i<listedItems.length; i++){
-            var tweetObj = listedItems[i]
-            var currentItem = formatTweetElement(tweetObj)
-            finalVarStr += currentItem
-        }
-        tweetsElement.innerHTML = finalVarStr
-        // console.log(listedItems)
-    }
-    xhr.send()
+
 </script>
 
 {% endblock content %}
