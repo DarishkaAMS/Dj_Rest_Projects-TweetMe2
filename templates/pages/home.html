@@ -14,7 +14,7 @@
         <form class="form" id="tweet-create-form" method="POST" action="/create-tweet">
             {% csrf_token %}
             <input type="hidden" value="/" name="next"/>
-            <textarea class="form-control" name="content" placeholder="Your tweet goes here"></textarea>
+            <textarea required='required' class="form-control" name="content" placeholder="Your tweet goes here"></textarea>
             <button type="submit" class="btn btn-primary"> Tweet </button>
         </form>
     </div>
@@ -46,7 +46,7 @@
                 const newTweetEl = formatTweetElement(newTweetJson)
                 const ogHtml = tweetsContainerEl.innerHTML
                 tweetsContainerEl.innerHTML = newTweetEl + ogHtml
-                myForm.reset()
+                myForm.reset() // to clean the window after tweet
             }
         }
         xhr.send(myFormData)
