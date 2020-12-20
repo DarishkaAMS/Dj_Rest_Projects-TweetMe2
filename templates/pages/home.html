@@ -54,6 +54,7 @@
 
         xhr.onload = function() {
             if (xhr.status === 201) {
+                handleTweetFormError("", false)
                 const newTweetJson = xhr.response
                 const newTweetEl = formatTweetElement(newTweetJson)
                 const ogHtml = tweetsContainerEl.innerHTML
@@ -61,7 +62,6 @@
                 myForm.reset() // to clean the window after tweet
             } else if (xhr.status===400){
                 const errorJson = xhr.response
-                console.log(errorJson)
                 const contentError = errorJson.content
                 let contentErrorMsg;
                 if (contentError) {
@@ -74,7 +74,6 @@
                 } else {
                     alert('An error occured. Please try again')
                 }
-                console.log(contentErrorMsg)
 
             } else if (xhr.status===500){
                 alert('There was a server error. Please try again')
