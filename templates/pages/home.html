@@ -46,6 +46,7 @@
                 const newTweetEl = formatTweetElement(newTweetJson)
                 const ogHtml = tweetsContainerEl.innerHTML
                 tweetsContainerEl.innerHTML = newTweetEl + ogHtml
+                myForm.reset()
             }
         }
         xhr.send(myFormData)
