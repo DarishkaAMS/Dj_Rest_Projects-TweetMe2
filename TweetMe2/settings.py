@@ -26,6 +26,7 @@ SECRET_KEY = '&mu5phpt5+02!=2^yw463f!b)e*0*fu=jx8wk5aq98p6v7t-vx'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'WORKGROUP']
+LOGIN_URL = '/login'
 
 # Application definition
 
