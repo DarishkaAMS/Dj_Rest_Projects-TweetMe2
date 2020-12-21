@@ -20,6 +20,8 @@ def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data=request.POST or None)
     if serializer.is_valid():
         obj = serializer.save(user=request.user)
+        # print(obj)
+        return JsonResponse(serializer.data, status=201)
     return JsonResponse({}, status=400)
 
 
