@@ -53,7 +53,7 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
 def tweet_list_view(request, *args, **kwargs):
     query_set = Tweet.objects.all()
     serializer = TweetSerializer(query_set, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=200)
 
 
 def tweet_list_view_pure_django(request, *args, **kwargs):
@@ -71,7 +71,17 @@ def tweet_list_view_pure_django(request, *args, **kwargs):
     return JsonResponse(data)
 
 
+@api_view(['GET'])  #http method the client == POST
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
+    query_set = Tweet.objects.filter(id=tweet_id)
+    if not query_set.exists():
+        return Response({}, status=404)
+    obj = query_set.first()
+    serializer = TweetSerializer(obj)
+    return Response(serializer.data, status=200)
+
+
+def tweet_detail_view_pure_django(request, tweet_id, *args, **kwargs):
     """
     REST API VIEW
     Consume by JavaScript or Swift or Java/iOS/Android
