@@ -49,7 +49,14 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
     return render(request, 'components/form.html', context={'form': form})
 
 
+@api_view(['GET'])  #http method the client == POST
 def tweet_list_view(request, *args, **kwargs):
+    query_set = Tweet.objects.all()
+    serializer = TweetSerializer(query_set, many=True)
+    return Response(serializer.data)
+
+
+def tweet_list_view_pure_django(request, *args, **kwargs):
     """
     REST API VIEW
     Consume by JavaScript or Swift or Java/iOS/Android
