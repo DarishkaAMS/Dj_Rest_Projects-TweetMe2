@@ -60,6 +60,24 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
     return Response({'message': "Tweet removed"}, status=200)
 
 
+@api_view(['POST'])  #http method the client == POST
+@permission_classes([IsAuthenticated])
+def tweet_action_view(request, *args, **kwargs):
+    '''
+    ID is required
+    Action option are: like, unlike, retweet
+    '''
+    query_set = Tweet.objects.filter(id=tweet_id)
+    if not query_set.exists():
+        return Response({}, status=404)
+    obj = query_set.first()
+    if request.user in obj.likes.all():
+        obj.likes.remove(request.user)
+    else:
+        obj.likes.add(request.user)
+    return Response({'message': "Tweet removed"}, status=200)
+
+
 def tweet_create_view_pure_django(request, *args, **kwargs):
     user = request.user
     if not request.user.is_authenticated:
