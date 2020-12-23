@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .forms import TweetForm
 from .models import Tweet
-from .serializers import TweetSerializer
+from .serializers import TweetSerializer, TweetActionSerializer
 
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
@@ -67,14 +67,23 @@ def tweet_action_view(request, *args, **kwargs):
     ID is required
     Action option are: like, unlike, retweet
     '''
-    query_set = Tweet.objects.filter(id=tweet_id)
-    if not query_set.exists():
-        return Response({}, status=404)
-    obj = query_set.first()
-    if request.user in obj.likes.all():
-        obj.likes.remove(request.user)
-    else:
-        obj.likes.add(request.user)
+    serializer = TweetActionSerializer(request.POST)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.validated_data
+        tweet_id = data.get('id')
+        action = data.get('action')
+        query_set = Tweet.objects.filter(id=tweet_id)
+        if not query_set.exists():
+            return Response({}, status=404)
+        obj = query_set.first()
+        if action == 'like':
+            obj.likes.add(request.user)
+        elif action == 'unlike':
+            obj.likes.remove(request.user)
+        elif action == 'retweet':
+            # todo
+            pass
+
     return Response({'message': "Tweet removed"}, status=200)
 
 

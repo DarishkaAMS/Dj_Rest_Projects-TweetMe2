@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'WORKGROUP']
 LOGIN_URL = '/login'
+
+TWEET_ACTIONS_OPTIONS = ['like', 'unlike', 'retweet']
 MAX_TWEET_LENGTH = 240
 
 # Application definition
