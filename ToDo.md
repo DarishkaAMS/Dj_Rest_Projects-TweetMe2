@@ -1,9 +1,12 @@
 1. Tweets:
     - Creating
         - Text
-        - Image
+        - Image - Media storage server
     - Delete
     - Retweeting
+        - Read only serializer
+        - Create only serializer
+    - Liking/Unliking
 
 2. Users:
     - Register
