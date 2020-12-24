@@ -23,7 +23,7 @@ def home_view(request, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
     # data = request.POST or None
-    serializer = TweetCreateSerializer(data=request.POST or None)
+    serializer = TweetCreateSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
