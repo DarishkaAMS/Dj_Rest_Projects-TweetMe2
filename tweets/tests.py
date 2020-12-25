@@ -13,6 +13,7 @@ class TweetTestCase(TestCase):
         Tweet.objects.create(content='Test 1st Tweet', user=self.user)
         Tweet.objects.create(content='Test 2nd Tweet', user=self.user)
         Tweet.objects.create(content='Test 3rd Tweet', user=self.user)
+        self.current_count = Tweet.objects.all().count()
 
     def test_user_created(self):
         self.assertEqual(self.user.username, 'Marishka')
@@ -53,3 +54,16 @@ class TweetTestCase(TestCase):
         client = self.get_client()
         response = client.post('/api/tweets/action/', {'id': 2, 'action': 'retweet'})
         self.assertEqual(response.status_code, 201)
+        data = response.json()
+        new_tweet_id = data.get('id')
+        self.assertNotEqual(2, new_tweet_id)
+        self.assertEqual(self.current_count + 1, new_tweet_id)
+
+    def test_tweet_create_api_view(self):
+        request_data = {'content': 'This is my test tweet'}
+        client = self.get_client()
+        response = client.post('/api/tweets/create/', request_data)
+        self.assertEqual(response.status_code, 201)
+        response_data = response.json()
+        new_tweet_id = response_data.get('id')
+        self.assertEqual(self.current_count + 1, new_tweet_id)
