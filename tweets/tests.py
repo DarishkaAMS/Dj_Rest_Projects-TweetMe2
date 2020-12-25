@@ -9,24 +9,25 @@ User = get_user_model()
 
 class TweetTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='Marishka', password='moo')
-        Tweet.objects.create(content='Test 1st Tweet', user=self.user)
-        Tweet.objects.create(content='Test 2nd Tweet', user=self.user)
-        Tweet.objects.create(content='Test 3rd Tweet', user=self.user)
+        self.user_m = User.objects.create_user(username='Marishka', password='moo')
+        self.user_b = User.objects.create_user(username='Barishka', password='boo')
+        Tweet.objects.create(content='Test 1st Tweet', user=self.user_m)
+        Tweet.objects.create(content='Test 2nd Tweet', user=self.user_m)
+        Tweet.objects.create(content='Test 3rd Tweet', user=self.user_b)
         self.current_count = Tweet.objects.all().count()
 
     def test_user_created(self):
-        self.assertEqual(self.user.username, 'Marishka')
+        self.assertEqual(self.user_m.username, 'Marishka')
         # self.assertEqual(self.user.username, '1')
 
     def test_tweet_created(self):
-        tweet_obj = Tweet.objects.create(content='Test 4th Tweet', user=self.user)
+        tweet_obj = Tweet.objects.create(content='Test 4th Tweet', user=self.user_m)
         self.assertEqual(tweet_obj.id, 4)
-        self.assertEqual(tweet_obj.user, self.user)
+        self.assertEqual(tweet_obj.user, self.user_m)
 
     def get_client(self):
         client = APIClient()
-        client.login(username=self.user.username, password='moo')
+        client.login(username=self.user_m.username, password='moo')
         return client
 
     def test_tweet_list(self):
@@ -75,3 +76,13 @@ class TweetTestCase(TestCase):
         data = response.json()
         _id = data.get('id') # _ - for internal usa
         self.assertEqual(_id, 1)
+
+    def test_tweet_delete_api_view(self):
+        client = self.get_client()
+        response = client.delete('/api/tweets/1/delete/')
+        self.assertEqual(response.status_code, 200)
+        client = self.get_client()
+        response = client.delete('/api/tweets/1/delete/')
+        self.assertEqual(response.status_code, 404)
+        response_incorrect_owner = client.delete('/api/tweets/3/delete/')
+        self.assertEqual(response_incorrect_owner.status_code, 403)
