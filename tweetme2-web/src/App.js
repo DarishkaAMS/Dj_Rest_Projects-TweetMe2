@@ -22,7 +22,8 @@ function loadTweets(callback){
 
 function Tweet(props) {
     const {tweet} = props
-    return <div className='col-10 mx-auto col-md-6' >
+    const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
+    return <div className={className} >
     <p>{tweet.content}</p>
     </div>
 }
