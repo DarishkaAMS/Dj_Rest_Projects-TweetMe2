@@ -1,40 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import {Tweet} from './tweetsg'
-
-function loadTweets(callback){
-    const xhr = new XMLHttpRequest() // xhr = SomeClass()
-    const method = 'GET' // 'POST'
-    const url = ' http://localhost:8000/api/tweets'
-    const responseType = 'json'
-
-    xhr.responseType = responseType
-    xhr.open(method, url)
-    xhr.onload = function() {
-        callback(xhr.response, xhr.status)
-    }
-    xhr.onerror = function (e) {
-        console.log(e)
-        callback({'message': 'The request was an error'}, 400)
-    }
-    xhr.send()
-}
+import {TweetsList} from './tweets'
 
 function App() {
-    const [tweets, setTweets] = useState([])
 
-  useEffect(() => {
-    const myCallback = (response, status) => {
-        if (status === 200) {
-        setTweets(response)
-        } else {
-            alert('There was an error')
-        }
-    }
-    loadTweets(myCallback)
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
@@ -43,9 +14,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <div>
-            {tweets.map((item, index) => {
-                return <Tweet tweet={item} className='my-5 py-5 border bg-white text-dark' key={'${index}-{item.id}'} />
-            })}
+            <TweetsList />
         </div>
         <a
           className="App-link"
