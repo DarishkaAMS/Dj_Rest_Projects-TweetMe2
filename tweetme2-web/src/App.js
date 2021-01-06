@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import {Tweet} from './tweetsg'
+
 function loadTweets(callback){
     const xhr = new XMLHttpRequest() // xhr = SomeClass()
     const method = 'GET' // 'POST'
@@ -18,22 +20,6 @@ function loadTweets(callback){
         callback({'message': 'The request was an error'}, 400)
     }
     xhr.send()
-}
-
-function ActionBtn(props){
-    const {tweet, action} = props
-    const className = props.className ? props.className : 'btn btn-primary btn-sm'
-    return action.type === 'like' ? <button className={className}> {tweet.likes} Like Me </button> : null
-}
-function Tweet(props) {
-    const {tweet} = props
-    const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
-    return <div className={className}>
-        <p>{tweet.id} - {tweet.content}</p>
-        <div className='btn btn-group'></div>
-            <ActionBtn tweet={tweet} action={{type:'like'}}/>
-            <ActionBtn tweet={tweet} action={{type:'unlike'}}/>
-        </div>
 }
 
 function App() {
