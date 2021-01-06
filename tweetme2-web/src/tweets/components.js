@@ -24,8 +24,17 @@ export function ActionBtn(props){
     const {tweet, action} = props
     const className = props.className ? props.className : 'btn btn-primary btn-sm'
     const actionDisplay = action.display ? action.display : 'Action'
-    const display = action.type === 'like' ? `${tweet.likes} ${actionDisplay}` : actionDisplay
-    return <button className={className}> {display} </button>
+    let likes = tweet.likes
+    const handleClick = (event) => {
+        event.preventDefault()
+        if (action.type === 'like') {
+            console.log(tweet.likes + 1)
+            likes = tweet.likes + 1
+        }
+
+    }
+    const display = action.type === 'like' ? `${likes} ${actionDisplay}` : actionDisplay
+    return <button className={className} onClick={handleClick}> {display} </button>
 
 }
 export function Tweet(props) {
