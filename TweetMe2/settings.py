@@ -146,10 +146,10 @@ DEFAULT_AUTHENTICATION_CLASSES = [
 
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
-        'rest_framework.renderers.BrowsableAPIRenderer'
+        'rest_framework.renderers.BrowsableAPIRenderer',
     ]
     DEFAULT_AUTHENTICATION_CLASSES += [
-
+        'TweetMe2.rest_api.dev.DevAuthentication'
     ]
 
 REST_FRAMEWORK = {
