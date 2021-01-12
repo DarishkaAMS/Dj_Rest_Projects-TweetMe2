@@ -10,7 +10,9 @@ export function TweetsComponent(props){
         const newVal = textAreaRef.current.value
         let tempNewTweets = [...newTweets]
         // change this to a server side call
+        console.log('new value', newVal)
         createTweet(newVal, (response, status)=>{
+            console.log(response, status)
             if (status === 201){
                 tempNewTweets.unshift(response)
             } else {
