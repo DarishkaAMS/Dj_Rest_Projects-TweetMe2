@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 
-import {apiTweetCreate, apiTweetList} from './lookup'
+import {
+    apiTweetAction,
+    apiTweetCreate,
+    apiTweetList} from './lookup'
 
 export function TweetsComponent(props){
     const textAreaRef = React.createRef()
@@ -72,8 +75,8 @@ export function ActionBtn(props){
     const className = props.className ? props.className : 'btn btn-primary btn-sm'
     const actionDisplay = action.display ? action.display : 'Action'
 
-    const handleClick = (event) => {
-        event.preventDefault()
+    const handleActionBackendEvent = (response, status) => {
+        console.log(response, status)
         if (action.type === 'like') {
             if (userLike === true) {
                 setLikes(likes - 1)
@@ -83,6 +86,10 @@ export function ActionBtn(props){
                 setUserLike(true)
             }
         }
+    }
+    const handleClick = (event) => {
+        event.preventDefault()
+        apiTweetAction(tweet.id, action.type, handleActionBackendEvent)
     }
     const display = action.type === 'like' ? `${likes} ${actionDisplay}` : actionDisplay
     return <button className={className} onClick={handleClick}> {display} </button>
