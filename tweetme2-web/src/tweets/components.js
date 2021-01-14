@@ -94,10 +94,17 @@ export function Tweet(props) {
     const {tweet} = props
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
     return <div className={className}>
-        <p>{tweet.id} - {tweet.content}</p>
-        <div className='btn btn-group'></div>
+        <div>
+//        <p>Bye</p>
+            <p>{tweet.id} - {tweet.content}</p>
+            {<p>Bye</p>}
+            {tweet.parent && <div className='col-12 p-3 border rounded'> <Tweet className={''} tweet={tweet.parent}/> </div>}
+//            <p>Bye</p>
+        </div>
+        <div className='btn btn-group'>
             <ActionBtn tweet={tweet} action={{type:'like', display: 'Likes'}}/>
             <ActionBtn tweet={tweet} action={{type:'unlike', display: 'Unlike'}}/>
             <ActionBtn tweet={tweet} action={{type:'retweet', display: 'Retweet'}}/>
         </div>
+    </div>
 }
