@@ -20,6 +20,7 @@ class TweetActionSerializer(serializers.Serializer):
 
 class TweetCreateSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Tweet
         fields = ['id', 'content', 'likes']
