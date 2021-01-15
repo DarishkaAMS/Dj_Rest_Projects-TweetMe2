@@ -92,6 +92,13 @@ export function ActionBtn(props){
 }
 
 export function ParentTweet(props){
+    const {tweet} = props
+    return tweet.parent ? <div className='row'>
+    <div className='col-11 mx-auto p-3 border rounded'>
+        <p className='mb-0 text-muted small'>Retweet</p>
+        <Tweet className={''} tweet={tweet.parent} />
+    </div>
+    </div> : null
 }
 
 export function Tweet(props) {
@@ -101,12 +108,7 @@ export function Tweet(props) {
         <div>
             <p>{tweet.id} - {tweet.content}</p>
             <p>{tweet.content}</p>
-            {tweet.parent && <div className='row'>
-                <div className='col-11 mx-auto p-3 border rounded'>
-                    <p className='mb-0 text-muted small'>Retweet</p>
-                    <Tweet className={''} tweet={tweet.parent} />
-                </div>
-                </div>}
+            <ParentTweet tweet={tweet} />
         </div>
         <div className='btn btn-group'>
             <ActionBtn tweet={tweet} action={{type:'like', display: 'Likes'}}/>
