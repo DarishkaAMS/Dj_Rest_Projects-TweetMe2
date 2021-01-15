@@ -105,15 +105,20 @@ export function Tweet(props) {
     const {tweet} = props
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
+
+    const handlePerformAction = () => {
+        // setActionTweet(null)
+    }
+
     return <div className={className}>
         <div>
             <p>{tweet.id} - {tweet.content}</p>
             <ParentTweet tweet={tweet} />
         </div>
         {actionTweet && <div className='btn btn-group'>
-            <ActionBtn tweet={actionTweet} action={{type:'like', display: 'Likes'}}/>
-            <ActionBtn tweet={actionTweet} action={{type:'unlike', display: 'Unlike'}}/>
-            <ActionBtn tweet={actionTweet} action={{type:'retweet', display: 'Retweet'}}/>
+            <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'like', display: 'Likes'}}/>
+            <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'unlike', display: 'Unlike'}}/>
+            <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'retweet', display: 'Retweet'}}/>
         </div>
     }
     </div>
