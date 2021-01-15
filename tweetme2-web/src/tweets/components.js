@@ -69,17 +69,15 @@ export function TweetsList(props) {
 }
 
 export function ActionBtn(props){
-    const {tweet, action} = props
-    const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)
-//    const [userLike, setUserLike] = useState(tweet.userLike === true ? true : false)
+    const {tweet, action, didPerformAction} = props
+    const likes = tweet.likes ? tweet.likes : 0
     const className = props.className ? props.className : 'btn btn-primary btn-sm'
     const actionDisplay = action.display ? action.display : 'Action'
 
     const handleActionBackendEvent = (response, status) => {
         console.log(response, status)
-        if (status === 200) {
-            setLikes(response.likes)
-//            setUserLike(true)
+        if ((status === 200 || status === 201) && didPerformAction){
+            didPerformAction(response)
         }
     }
     const handleClick = (event) => {
@@ -106,8 +104,8 @@ export function Tweet(props) {
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
 
-    const handlePerformAction = () => {
-        // setActionTweet(null)
+    const handlePerformAction = (newActionTweet) => {
+        setActionTweet(newActionTweet)
     }
 
     return <div className={className}>
