@@ -3,6 +3,7 @@ from rest_framework import authentication
 
 User = get_user_model()
 
+
 class DevAuthentication(authentication.BasicAuthentication):
     def authenticate(self, request):
         query_set = User.objects.filter(id=1)
