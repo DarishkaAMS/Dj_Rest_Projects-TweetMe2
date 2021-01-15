@@ -64,7 +64,7 @@ export function TweetsList(props) {
         }
      }, [tweetsInit, tweetsDidSet, setTweetsDidSet])
     return tweets.map((item, index) => {
-        return <Tweet tweet={item} className='my-5 py-5 border bg-white text-dark' key={'${index}-{item.id}'} />
+        return <Tweet tweet={item} className='my-5 py-5 border bg-white text-dark' key={`${index}-{item.id}`} />
     })
 }
 
@@ -95,11 +95,10 @@ export function Tweet(props) {
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
     return <div className={className}>
         <div>
-//        <p>Bye</p>
             <p>{tweet.id} - {tweet.content}</p>
-            {<p>Bye</p>}
-            {tweet.parent && <div className='col-12 p-3 border rounded'> <Tweet className={''} tweet={tweet.parent}/> </div>}
-//            <p>Bye</p>
+            <p>{tweet.content}</p>
+            {tweet.parent && <div> <Tweet tweet={tweet.parent} /> </div>}
+            <div>GO</div>
         </div>
         <div className='btn btn-group'>
             <ActionBtn tweet={tweet} action={{type:'like', display: 'Likes'}}/>
