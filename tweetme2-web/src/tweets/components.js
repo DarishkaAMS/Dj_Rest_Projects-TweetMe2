@@ -97,7 +97,7 @@ export function Tweet(props) {
         <div>
             <p>{tweet.id} - {tweet.content}</p>
             <p>{tweet.content}</p>
-            {tweet.parent && <div> <Tweet tweet={tweet.parent} /> </div>}
+            {tweet.parent && <div> <Tweet className={''} tweet={tweet.parent} /> </div>}
             <div>GO</div>
         </div>
         <div className='btn btn-group'>
