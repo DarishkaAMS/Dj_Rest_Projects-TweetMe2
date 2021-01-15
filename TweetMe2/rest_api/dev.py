@@ -5,6 +5,6 @@ User = get_user_model()
 
 class DevAuthentication(authentication.BasicAuthentication):
     def authenticate(self, request):
-        query_set = User.objects.all()
+        query_set = User.objects.filter(id=1)
         user = query_set.order_by('?').first() # by random
         return (user, None)
