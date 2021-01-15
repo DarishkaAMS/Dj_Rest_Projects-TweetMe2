@@ -77,7 +77,7 @@ export function ActionBtn(props){
     const handleActionBackendEvent = (response, status) => {
         console.log(response, status)
         if ((status === 200 || status === 201) && didPerformAction){
-            didPerformAction(response)
+            didPerformAction(response, status)
         }
     }
     const handleClick = (event) => {
@@ -104,8 +104,12 @@ export function Tweet(props) {
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
 
-    const handlePerformAction = (newActionTweet) => {
-        setActionTweet(newActionTweet)
+    const handlePerformAction = (newActionTweet, status) => {
+        if (status === 200){
+            setActionTweet(newActionTweet)
+        } else if (status === 201){
+           // let the tweet lisk know
+        }
     }
 
     return <div className={className}>
