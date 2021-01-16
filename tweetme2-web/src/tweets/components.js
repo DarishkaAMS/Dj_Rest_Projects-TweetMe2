@@ -108,7 +108,7 @@ export function Tweet(props) {
         if (status === 200){
             setActionTweet(newActionTweet)
         } else if (status === 201){
-           // let the tweet lisk know
+           // let the tweet list know
         }
     }
 
