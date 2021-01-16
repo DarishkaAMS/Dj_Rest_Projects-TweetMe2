@@ -33,6 +33,8 @@ def tweet_create_view(request, *args, **kwargs):
 def tweet_list_view(request, *args, **kwargs):
     query_set = Tweet.objects.all()
     username = request.GET.get('username')
+    if username != None:
+        query_set = query_set.filter(user__username__iexact=username) # case insensitive match
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
