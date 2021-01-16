@@ -18,7 +18,7 @@ def home_view(request, *args, **kwargs):
     return render(request, 'pages/home.html', context={}, status=200)
 
 
-@api_view(['POST'])  #http method the client == POST
+@api_view(['POST'])  # http method the client == POST
 # @authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
@@ -29,14 +29,15 @@ def tweet_create_view(request, *args, **kwargs):
     return Response({}, status=400)
 
 
-@api_view(['GET'])  #http method the client == POST
+@api_view(['GET'])  # http method the client == POST
 def tweet_list_view(request, *args, **kwargs):
     query_set = Tweet.objects.all()
+    username = request.GET.get('username')
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
 
-@api_view(['GET'])  #http method the client == POST
+@api_view(['GET'])  # http method the client == POST
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     query_set = Tweet.objects.filter(id=tweet_id)
     if not query_set.exists():
@@ -45,7 +46,8 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     serializer = TweetSerializer(obj)
     return Response(serializer.data, status=200)
 
-@api_view(['DELETE', 'POST'])  #http method the client == POST
+
+@api_view(['DELETE', 'POST'])  # http method the client == POST
 @permission_classes([IsAuthenticated])
 def tweet_delete_view(request, tweet_id, *args, **kwargs):
     query_set = Tweet.objects.filter(id=tweet_id)
@@ -59,13 +61,13 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
     return Response({'message': "Tweet removed"}, status=200)
 
 
-@api_view(['POST'])  #http method the client == POST
+@api_view(['POST'])  # http method the client == POST
 @permission_classes([IsAuthenticated])
 def tweet_action_view(request, *args, **kwargs):
-    '''
+    """
     ID is required
     Action option are: like, unlike, retweet
-    '''
+    """
     serializer = TweetActionSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         data = serializer.validated_data
