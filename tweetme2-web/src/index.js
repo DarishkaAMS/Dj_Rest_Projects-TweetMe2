@@ -11,16 +11,11 @@ if (appEL) {
     ReactDOM.render(<App />, appEL);
 }
 
-//ReactDOM.render(
-//  <React.StrictMode>
-//    <App />
-//  </React.StrictMode>,
-//  document.getElementById('root')
-//);
-
+const e = React.createElement
 const tweetsEL = document.getElementById('tweetme-2')
 if (tweetsEL) {
-    ReactDOM.render(<TweetsComponent />, tweetsEL)
+    ReactDOM.render(
+        e(TweetsComponent, tweetsEL.dataset), tweetsEL);
 }
 
 // If you want to start measuring performance in your app, pass a function
