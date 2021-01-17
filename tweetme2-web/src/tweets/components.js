@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 
-import {ActionBtn} from './buttons'
+import {TweetsList} from './list'
 
-import {
-    apiTweetCreate,
-    apiTweetList} from './lookup'
+import {apiTweetCreate} from './lookup'
 
 export function TweetsComponent(props){
     const textAreaRef = React.createRef()
