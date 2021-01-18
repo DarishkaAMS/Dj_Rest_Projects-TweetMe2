@@ -16,6 +16,7 @@ export function Tweet(props) {
     const {tweet, didRetweet, hideActions} = props
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
+    const isDetail = false
     const handleLink = (event) => {
         event.preventDefault()
         window.location.href = `/${tweet.id}`
@@ -39,7 +40,7 @@ export function Tweet(props) {
             <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'like', display: 'Likes'}}/>
             <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'unlike', display: 'Unlike'}}/>
             <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'retweet', display: 'Retweet'}}/>
-            <button className='btn btn-outline-primary' onClick={handleLink}>View</button>
+            {isDetail === true ? null : <button className='btn btn-outline-primary' onClick={handleLink}>View</button>}
         </div>
     }
     </div>
