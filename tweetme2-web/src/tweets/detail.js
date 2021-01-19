@@ -20,6 +20,9 @@ export function Tweet(props) {
     const match = path.match(/(?<tweetid>\d+)/)
     const urlTweetId = match ? match.groups.tweetid : -1
     const isDetail = `${tweet.id}` === `${urlTweetId}`
+    console.lot('tweet.id', tweet.id)
+    console.lot('urlTweetId', urlTweetId)
+
     const handleLink = (event) => {
         event.preventDefault()
         window.location.href = `/${tweet.id}`
