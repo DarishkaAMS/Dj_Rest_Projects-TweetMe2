@@ -23,7 +23,6 @@ class Tweet(models.Model):
     def is_retweet(self):
         return self.parent != None
 
-
     def serialize(self):
         '''
         Old Way of serializing
@@ -34,6 +33,7 @@ class Tweet(models.Model):
             "content": self.content,
             "likes": random.randint(0, 20)
         }
+
 
 class TweetLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
