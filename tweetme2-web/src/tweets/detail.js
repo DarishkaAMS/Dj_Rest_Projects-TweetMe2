@@ -47,7 +47,7 @@ export function Tweet(props) {
                 <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'retweet', display: 'Retweet'}}/>
             </React.Fragment>
         }
-            {isDetail === true ? null : <button className='btn btn-outline-primary' onClick={handleLink}> View </button>}
+            {isDetail === true ? null : <button className='btn btn-outline-primary btn-small' onClick={handleLink}> View </button>}
         </div>
     </div>
 }
