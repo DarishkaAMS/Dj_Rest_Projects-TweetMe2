@@ -14,6 +14,13 @@ def login_view(request, *args, **kwargs):
     return render(request, "form.html", {"form": form})
 
 
+def logout_view(request, *args, **kwargs):
+    if request.method == "POST":
+        logout(request)
+        return redirect("/login")
+    return render(request, "accounts/logout.html")
+
+
 def registration_view(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
