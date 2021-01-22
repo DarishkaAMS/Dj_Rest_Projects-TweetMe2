@@ -23,7 +23,12 @@ def logout_view(request, *args, **kwargs):
     if request.method == "POST":
         logout(request)
         return redirect("/login")
-    return render(request, "accounts/logout.html")
+    context = {
+        "form": None,
+        "btn_label": "Logout?",
+        "title": "Logout"
+    }
+    return render(request, "accounts/auth.html", context)
 
 
 def registration_view(request, *args, **kwargs):
