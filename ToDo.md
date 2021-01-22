@@ -17,8 +17,8 @@
         - Text
         - Follow button
     - Feed
-        - User's feed only
-        - User + who they follow
+        - User's feed only?
+        - User + who they follow?
 
 3. Following
 
