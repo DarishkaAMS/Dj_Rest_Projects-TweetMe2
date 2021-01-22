@@ -12,3 +12,10 @@ def login_view(request, *args, **kwargs):
         login(request, user_)
         return redirect("/")
     return render(request, "form.html", {"form": form})
+
+
+def registration_view(request, *args, **kwargs):
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+    return render(request, "form.html", {"form": form})
