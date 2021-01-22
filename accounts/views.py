@@ -16,7 +16,7 @@ def login_view(request, *args, **kwargs):
         "btn_label": "Login",
         "title": "Login"
     }
-    return render(request, "accounts/login.html", context)
+    return render(request, "accounts/auth.html", context)
 
 
 def logout_view(request, *args, **kwargs):
@@ -30,4 +30,4 @@ def registration_view(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         print(form.cleaned_data)
-    return render(request, "accounts/register.html", {"form": form})
+    return render(request, "accounts/auth.html", {"form": form})
