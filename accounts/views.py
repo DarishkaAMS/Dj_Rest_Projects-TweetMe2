@@ -30,4 +30,9 @@ def registration_view(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         print(form.cleaned_data)
-    return render(request, "accounts/auth.html", {"form": form})
+    context = {
+        "form": form,
+        "btn_label": "Register",
+        "title": "Register"
+    }
+    return render(request, "accounts/auth.html", context)
