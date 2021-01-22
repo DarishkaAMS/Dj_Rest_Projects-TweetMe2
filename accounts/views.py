@@ -31,7 +31,7 @@ def logout_view(request, *args, **kwargs):
     return render(request, "accounts/auth.html", context)
 
 
-def registration_view(request, *args, **kwargs):
+def register_view(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         print(form.cleaned_data)
