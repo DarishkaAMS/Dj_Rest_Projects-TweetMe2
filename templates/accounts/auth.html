@@ -4,7 +4,10 @@
 
 <div class="cal-10 col-md-4 mx-auto">
     <h1> {{ title }} </h1>
-    {% include "components/from.html" with form=form btn_label=btn_label %}
+    {% if description %}
+        <p> {{ description }} </p>
+    {% endif %}
+    {% include "components/form.html" with form=form btn_label=btn_label %}
 </div>
 
 {% endblock content %}

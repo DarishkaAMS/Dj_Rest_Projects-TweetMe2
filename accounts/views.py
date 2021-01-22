@@ -25,7 +25,8 @@ def logout_view(request, *args, **kwargs):
         return redirect("/login")
     context = {
         "form": None,
-        "btn_label": "Logout?",
+        "description": "Are you sure you  want to logout?",
+        "btn_label": "Click to confirm",
         "title": "Logout"
     }
     return render(request, "accounts/auth.html", context)
