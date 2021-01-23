@@ -20,9 +20,9 @@ def profile_update_view(request, *args, **kwargs):
     form = ProfileForm(request.POST or None, instance=my_profile, initial=user_data)
     if form.is_valid():
         profile_obj = form.save(commit=False)
-        first_name = form.cleaned_data('first_name')
-        last_name = form.cleaned_data('last_name')
-        email = form.cleaned_data('email')
+        first_name = form.cleaned_data.get('first_name')
+        last_name = form.cleaned_data.get('last_name')
+        email = form.cleaned_data.get('email')
         user.first_name = first_name
         user.last_name = last_name
         user.email = email
