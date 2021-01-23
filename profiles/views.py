@@ -12,15 +12,15 @@ def profile_update_view(request, *args, **kwargs):
         return redirect('/login?next=/profile/update')
     user = request.user
     my_profile = user.profile
-    form = ProfileForm(request.POST or None, instance=my_profile)
+    form = ProfileForm(request.POST or None, instance=my_profile) # , initial={'first_name': 'D'}
     if form.is_valid():
         profile_obj = form.save(commit=False)
         first_name = form.cleaned_data('first_name')
         last_name = form.cleaned_data('last_name')
-        email_address = form.cleaned_data('email-address')
+        email = form.cleaned_data('email')
         user.first_name = first_name
         user.last_name = last_name
-        user.email_address = email_address
+        user.email = email
         user.save()
         profile_obj.save()
     context = {
