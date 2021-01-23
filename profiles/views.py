@@ -11,8 +11,13 @@ def profile_update_view(request, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect('/login?next=/profile/update')
     user = request.user
+    user_data = {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email
+    }
     my_profile = user.profile
-    form = ProfileForm(request.POST or None, instance=my_profile) # , initial={'first_name': 'D'}
+    form = ProfileForm(request.POST or None, instance=my_profile, initial=user_data)
     if form.is_valid():
         profile_obj = form.save(commit=False)
         first_name = form.cleaned_data('first_name')
