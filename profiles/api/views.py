@@ -21,21 +21,16 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 #     return Response({}, status=200)
 
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def user_follow_view(request, username, *args, **kwargs):
     current_user = request.user
-    other_user_query_set = User.objects,filter(username=username)
+    other_user_query_set = User.objects.filter(username=username)
     if not other_user_query_set.exists():
         return Response({}, status=404)
-    other = other_user_query_set
+    other = other_user_query_set.first()
     profile = other.profile
-    data = {}
-    try:
-        data = request.data
-    except:
-        pass
-    print(data)
+    data = request.data or {}
     action = data.get("action")
     if action == "follow":
         profile.followers.add(current_user)
@@ -43,4 +38,5 @@ def user_follow_view(request, username, *args, **kwargs):
         profile.followers.remove(current_user)
     else:
         pass
-    return Response({"followers": profile.followers.all()}, status=400)
+    current_followers_query_set = profile.followers.all()
+    return Response({"count": current_followers_query_set.count()}, status=200)
