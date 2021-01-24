@@ -19,6 +19,12 @@ class ProfileTestCase(TestCase):
     def test_following(self):
         first_user = self.user_m
         second_user = self.user_b
+        # added a follower
         first_user.profile.followers.add(second_user)
-        query_set = second_user.following.filter(user=first_user)
+        second_user_following_whom = second_user.following.all()
+        # from a user_m, check other user is being followed
+        query_set = second_user_following_whom.filter(user=first_user)
+        # check new user is not following anyone
+        first_user_following_no_one = first_user.following.all()
         self.assertTrue(query_set.exists())
+        self.assertFalse(first_user_following_no_one.exists())
