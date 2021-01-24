@@ -39,7 +39,7 @@ class TweetTestCase(TestCase):
         print(response.json())
 
     def test_tweets_related_name(self):
-        user = self.user
+        user = self.user_m
         self.assertEqual(user.tweets.count(), 2)
 
     def test_action_like(self):
@@ -48,7 +48,7 @@ class TweetTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         like_count = response.json().get('likes')
         self.assertEqual(like_count, 1)
-        user = self.user
+        user = self.user_m
         my_like_instances_count = user.tweetlike_set.count()
         self.assertEqual(my_like_instances_count, 1)
 
