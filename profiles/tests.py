@@ -45,3 +45,16 @@ class ProfileTestCase(TestCase):
         r_data = response.json()
         count = r_data.get("count")
         self.assertEqual(count, 1)
+
+    def test_unfollow_api_endpoint(self):
+        first_user = self.user_m
+        second_user = self.user_b
+        first_user.profile.followers.add(second_user)
+        client = self.get_client()
+        response = client.post(
+            f'/api/profiles/{self.user_b.username}/follow',
+            {"action": "unfollow"}
+        )
+        r_data = response.json()
+        count = r_data.get("count")
+        self.assertEqual(count, 0)
