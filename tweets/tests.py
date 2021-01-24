@@ -45,13 +45,13 @@ class TweetTestCase(TestCase):
     def test_action_like(self):
         client = self.get_client()
         response = client.post('/api/tweets/action/', {'id': 1, 'action': 'like'})
-        self.assertEqual(response.status_code, 200)
         like_count = response.json().get('likes')
-        self.assertEqual(like_count, 1)
         user = self.user_m
         my_like_instances_count = user.tweetlike_set.count()
-        self.assertEqual(my_like_instances_count, 1)
         my_related_likes = user.tweet_user.count()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(like_count, 1)
+        self.assertEqual(my_like_instances_count, 1)
         self.assertEqual(my_like_instances_count, my_related_likes)
 
     def test_action_unlike(self):
