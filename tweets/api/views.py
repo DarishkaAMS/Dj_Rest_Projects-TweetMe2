@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from ..forms import TweetForm
@@ -37,10 +38,13 @@ def tweet_list_view(request, *args, **kwargs):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def tweet_feed_view(request, *args, **kwargs):
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
     user = request.user
     query_set = Tweet.objects.feed(user)
-    serializer = TweetSerializer(query_set, many=True)
-    return Response(serializer.data, status=200)
+    paginated_query_set = paginator.paginate_queryset(query_set, request)
+    serializer = TweetSerializer(paginated_query_set, many=True)
+    return paginator.get_paginated_response(serializer.data) # Response(serializer.data, status=200)
 
 
 @api_view(['GET'])  # http method the client == POST
