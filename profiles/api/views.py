@@ -26,7 +26,7 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 def user_follow_view(request, username, *args, **kwargs):
     current_user = request.user
     other_user_query_set = User.objects.filter(username=username)
-    if current_user == username:
+    if current_user.username == username:
         current_user_followers = current_user.profile.followers.all()
         return Response({"count": current_user_followers.count()}, status=200)
     if not other_user_query_set.exists():
