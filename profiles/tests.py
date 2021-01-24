@@ -12,3 +12,6 @@ class ProfileTestCase(TestCase):
         self.user_m = User.objects.create_user(username='Marishka', password='moo')
         self.user_b = User.objects.create_user(username='Barishka', password='boo')
 
+    def test_profile_created(self):
+        query_set = Profile.objects.all()
+        self.assertEqual(query_set.count(), 2)
