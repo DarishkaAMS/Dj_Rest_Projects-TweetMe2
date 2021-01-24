@@ -23,7 +23,7 @@ export function TweetsList(props) {
                     setTweetsInit(response.results)
                     setTweetsDidSet(true)
                 } else {
-                    alert('There was an error')
+                    alert('Oops... There was an error')
             }
         }
         apiTweetList(props.username, handleTweetListLookup)
