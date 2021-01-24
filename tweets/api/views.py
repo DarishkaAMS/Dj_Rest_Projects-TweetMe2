@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db.models import Q
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
@@ -42,8 +43,10 @@ def tweet_feed_view(request, *args, **kwargs):
     followed_users_id = []
     if profile_exist:
         followed_users_id = user.following.values_list("user__id", flat=True)  # [x.user.id for x in profiles]
-    followed_users_id.append(user.id)
-    query_set = Tweet.objects.filter(user__id__in=followed_users_id).order_by("-timestamp")
+    query_set = Tweet.objects.filter(
+        Q(user__id__in=followed_users_id) |
+        Q(user=user)
+    ).distinct().order_by("-timestamp")
     serializer = TweetSerializer(query_set, many=True)
     return Response(serializer.data, status=200)
 
