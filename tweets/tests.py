@@ -7,6 +7,7 @@ from .models import Tweet
 # Create your tests here.
 User = get_user_model()
 
+
 class TweetTestCase(TestCase):
     def setUp(self):
         self.user_m = User.objects.create_user(username='Marishka', password='moo')
@@ -36,6 +37,10 @@ class TweetTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 3)
         print(response.json())
+
+    def test_tweets_related_name(self):
+        user = self.user
+        self.assertEqual(user.tweets.count(), 2)
 
     def test_action_like(self):
         client = self.get_client()
