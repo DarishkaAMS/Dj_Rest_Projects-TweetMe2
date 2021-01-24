@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Profile
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class PublicProfileSerializer(serializers.ModelSerializer):
     first_name = serializers.SerializerMethodField(read_only=True)
     last_name = serializers.SerializerMethodField(read_only=True)
     username = serializers.SerializerMethodField(read_only=True)
@@ -35,5 +35,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_following_count(self, obj):
         return obj.user.following.count()
 
-    def get_followers_count(self, obj):
+    def get_follower_count(self, obj):
         return obj.followers.count()
