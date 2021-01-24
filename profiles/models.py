@@ -10,6 +10,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=220, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
+    followers = models.ManyToManyField(User, related_name='following', blank=True)
+    '''
+    project_obj = Profile.objects,first()
+    project_obj.followers.all() -> All users following this profile
+    user.following.all() -> All users I follow
+    '''
 
 
 def user_did_save(sender, instance, created, *args, **kwargs):
