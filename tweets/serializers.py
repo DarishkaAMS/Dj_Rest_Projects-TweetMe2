@@ -24,7 +24,7 @@ class TweetCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ['user', 'id', 'content', 'likes']
+        fields = ['user', 'id', 'content', 'likes', 'timestamp']
 
     def get_user(self, obj):
         return obj.user.id
@@ -46,7 +46,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ['user', 'id', 'content', 'likes', 'is_retweet', 'parent']
+        fields = ['user', 'id', 'content', 'likes', 'is_retweet', 'parent', 'timestamp']
 
     def get_user(self, obj):
         return obj.user.id
