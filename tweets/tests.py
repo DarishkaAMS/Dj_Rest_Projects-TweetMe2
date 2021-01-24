@@ -48,6 +48,9 @@ class TweetTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         like_count = response.json().get('likes')
         self.assertEqual(like_count, 1)
+        user = self.user
+        my_like_instances_count = user.tweetlike_set.count()
+        self.assertEqual(my_like_instances_count, 1)
 
     def test_action_unlike(self):
         client = self.get_client()
