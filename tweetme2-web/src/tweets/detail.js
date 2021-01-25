@@ -40,7 +40,7 @@ export function Tweet(props) {
             <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
                 {tweet.user.username[0]}
             </span>
-        </div>
+        </div>Display User Within Tweet
         <div className='col-11'>
         <div>
             <p>
