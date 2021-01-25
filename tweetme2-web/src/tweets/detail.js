@@ -10,7 +10,8 @@ export function ParentTweet(props){
 export function Tweet(props) {
     const {tweet, didRetweet, hideActions, isRetweet} = props
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
-    const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
+    let className = props.className ? props.className : 'col-10 mx-auto col-md-6'
+    className = isRetweet === true ? `${className} border rounded` : className
     const path = window.location.pathname
     const match = path.match(/(?<tweetid>\d+)/)
     const urlTweetId = match ? match.groups.tweetid : -1
@@ -31,6 +32,9 @@ export function Tweet(props) {
     }
 
     return <div className={className}>
+            {isRetweet === true && <div className='mb-2'>
+            <span className='small text-muted'> Retweet </span>
+            </div>}
     <div className='d-flex'>
         <div className=''>
             <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
@@ -39,7 +43,6 @@ export function Tweet(props) {
         </div>
         <div className='col-11'>
         <div>
-            <i>{isRetweet === true && <span> Retweet </span>}</i>
             <p>
                 {tweet.user.first_name}{" "}{tweet.user.last_name}
                 <p> @{tweet.user.username} </p>
