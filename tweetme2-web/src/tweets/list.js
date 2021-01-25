@@ -38,6 +38,15 @@ export function TweetsList(props) {
         updateFinalTweets.unshift(tweets)
         setTweets(updateFinalTweets)
     }
+    const handleLoadNext = (event) => {
+        event.preventDefault()
+        if (nextUrl !== null) {
+            const handleLoadNextResponse = (response, status) => {
+            }
+            apiTweetList(props.username, handleLoadNextResponse, nextUrl)
+        }
+    }
+
     return <React.Fragment> {tweets.map((item, index) => {
         return <Tweet
         tweet={item}
