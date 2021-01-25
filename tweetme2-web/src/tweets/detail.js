@@ -4,16 +4,11 @@ import {ActionBtn} from './buttons'
 
 export function ParentTweet(props){
     const {tweet} = props
-    return tweet.parent ? <div className='row'>
-    <div className='col-11 mx-auto p-3 border rounded'>
-        <p className='mb-0 text-muted small'>Retweet</p>
-        <Tweet hideActions className={' '} tweet={tweet.parent} />
-    </div>
-    </div> : null
+    return tweet.parent ? <Tweet isRetweet hideActions className={' '} tweet={tweet.parent} /> : null
 }
 
 export function Tweet(props) {
-    const {tweet, didRetweet, hideActions} = props
+    const {tweet, didRetweet, hideActions, isRetweet} = props
     const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
     const path = window.location.pathname
@@ -36,6 +31,13 @@ export function Tweet(props) {
     }
 
     return <div className={className}>
+    <div className='d-flex'>
+        <div className=''>
+            <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
+                {tweet.user.username[0]}
+            </span>
+        </div>
+        <div className='col-11'>
         <div>
             <p>
                 {tweet.user.first_name}{" "}{tweet.user.last_name}
@@ -53,5 +55,7 @@ export function Tweet(props) {
         }
             {isDetail === true ? null : <button className='btn btn-outline-primary btn-small' onClick={handleLink}> View </button>}
         </div>
+        </div>
+    </div>
     </div>
 }
