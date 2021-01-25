@@ -2,6 +2,18 @@ import React, {useState} from 'react'
 
 import {ActionBtn} from './buttons'
 
+function UserLink(props){
+    const {user, includeFullName} = props
+    const nameDisplay = includeFullName === true ? `${user.first_name} ${user.last_name}`: null
+
+    const handleUserLink = (event) => {
+        window.location.href= `/profiles/${user.username}`
+    }
+    return <React.Fragment>
+        {nameDisplay}{" "}
+        <span onClick={handleUserLink}> @{user.username} </span>
+    </React.Fragment>
+}
 function UserPicture(props){
     const {user} = props
     return <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
@@ -40,7 +52,7 @@ export function Tweet(props) {
 
     return <div className={className}>
             {isRetweet === true && <div className='mb-2'>
-            <span className='small text-muted'> Retweet via @{retweeter.username} </span>
+            <span className='small text-muted'> Retweet via <UserLink user={retweeter} /> </span>
             </div>}
     <div className='d-flex'>
         <div className=''>
@@ -49,8 +61,7 @@ export function Tweet(props) {
         <div className='col-11'>
         <div>
             <p>
-                {tweet.user.first_name}{" "}{tweet.user.last_name}
-                <p> @{tweet.user.username} </p>
+                <UserLink includeFullName user={tweet.user}/>
             </p>
             <p>{tweet.content}</p>
             <ParentTweet tweet={tweet} retweeter={tweet.user}/>
