@@ -44,7 +44,7 @@ export function Tweet(props) {
             <p>{tweet.content}</p>
             <ParentTweet tweet={tweet} />
         </div>
-        <div className='btn btn-group'>
+        <div className='btn btn-group px-0'>
         {(actionTweet && hideActions !== true) && <React.Fragment>
                 <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'like', display: 'Likes'}}/>
                 <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type:'unlike', display: 'Unlike'}}/>
