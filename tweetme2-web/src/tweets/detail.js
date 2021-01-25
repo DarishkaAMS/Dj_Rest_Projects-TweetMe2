@@ -39,6 +39,7 @@ export function Tweet(props) {
         </div>
         <div className='col-11'>
         <div>
+            <i>{isRetweet === true && <span> Retweet </span>}</i>
             <p>
                 {tweet.user.first_name}{" "}{tweet.user.last_name}
                 <p> @{tweet.user.username} </p>
