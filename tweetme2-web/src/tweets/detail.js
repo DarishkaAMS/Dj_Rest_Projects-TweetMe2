@@ -2,6 +2,13 @@ import React, {useState} from 'react'
 
 import {ActionBtn} from './buttons'
 
+function UserPicture(props){
+    const {user} = props
+    return <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
+        {user.username[0]}
+    </span>
+}
+
 export function ParentTweet(props){
     const {tweet} = props
     return tweet.parent ? <Tweet isRetweet retweeter={props.retweeter} hideActions className={' '} tweet={tweet.parent} /> : null
@@ -37,10 +44,8 @@ export function Tweet(props) {
             </div>}
     <div className='d-flex'>
         <div className=''>
-            <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
-                {tweet.user.username[0]}
-            </span>
-        </div>Display User Within Tweet
+            <UserPicture user={tweet.user} />
+        </div>
         <div className='col-11'>
         <div>
             <p>
