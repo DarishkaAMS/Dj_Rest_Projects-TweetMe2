@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import {apiTweetList} from './lookup'
+import {apiTweetFeed} from './lookup'
 
 import {Tweet} from './detail'
 
@@ -26,7 +26,7 @@ export function TweetsList(props) {
                     alert('Oops... There was an error')
             }
         }
-        apiTweetList(props.username, handleTweetListLookup)
+        apiTweetFeed(props.username, handleTweetListLookup)
         }
      }, [tweetsInit, tweetsDidSet, setTweetsDidSet, props.username])
 
@@ -51,7 +51,7 @@ export function TweetsList(props) {
                     alert('Oops... There was an error')
                 }
             }
-            apiTweetList(props.username, handleLoadNextResponse, nextUrl)
+            apiTweetFeed(handleLoadNextResponse, nextUrl)
         }
     }
 
