@@ -2,23 +2,33 @@ import React, {useState} from 'react'
 
 import {ActionBtn} from './buttons'
 
+
 function UserLink(props){
+    const {username} = props
+    const handleUserLink = (event) => {
+        window.location.href= `/profiles/${username}`
+    }
+    return <span onClick={handleUserLink}>
+        {props.children}
+    </span>
+}
+
+
+function UserDisplay(props) {
     const {user, includeFullName} = props
     const nameDisplay = includeFullName === true ? `${user.first_name} ${user.last_name}`: null
 
-    const handleUserLink = (event) => {
-        window.location.href= `/profiles/${user.username}`
-    }
     return <React.Fragment>
         {nameDisplay}{" "}
-        <span onClick={handleUserLink}> @{user.username} </span>
+        <UserLink username={user.username}> @{user.username} </UserLink>
     </React.Fragment>
 }
-function UserPicture(props){
+
+function UserPicture (props) {
     const {user} = props
-    return <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
+    return  <UserLink username={user.username}> <span className='mx-1 px-3 py-2 rounded-circle bg-dark text-white'>
         {user.username[0]}
-    </span>
+    </span></UserLink>
 }
 
 export function ParentTweet(props){
@@ -52,7 +62,7 @@ export function Tweet(props) {
 
     return <div className={className}>
             {isRetweet === true && <div className='mb-2'>
-            <span className='small text-muted'> Retweet via <UserLink user={retweeter} /> </span>
+            <span className='small text-muted'> Retweet via <UserDisplay user={retweeter} /> </span>
             </div>}
     <div className='d-flex'>
         <div className=''>
@@ -61,7 +71,7 @@ export function Tweet(props) {
         <div className='col-11'>
         <div>
             <p>
-                <UserLink includeFullName user={tweet.user}/>
+                <UserDisplay includeFullName user={tweet.user}/>
             </p>
             <p>{tweet.content}</p>
             <ParentTweet tweet={tweet} retweeter={tweet.user}/>
