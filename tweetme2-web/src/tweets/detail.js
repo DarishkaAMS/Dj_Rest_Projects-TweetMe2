@@ -8,7 +8,7 @@ function UserLink(props){
     const handleUserLink = (event) => {
         window.location.href= `/profiles/${username}`
     }
-    return <span onClick={handleUserLink}>
+    return <span className='pointer' onClick={handleUserLink}>
         {props.children}
     </span>
 }
