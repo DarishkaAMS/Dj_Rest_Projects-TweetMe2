@@ -43,8 +43,14 @@ def profile_detail_view(request, username, *args, **kwargs):
         raise Http404
 
     profile_obj = query_set.first()
+    is_following = False
+    if request.user.is_authenticated:
+        user = request.user
+        is_following = user in profile_obj.followers.ll()
+        # is_following = profile_obj in user.following.ll()
     context = {
         "username": username,
-        "profile": profile_obj
+        "profile": profile_obj,
+        "is_following": is_following
     }
     return render(request, "profiles/detail.html", context)
