@@ -29,7 +29,7 @@ def profile_detail_api_view(request, username, *args, **kwargs):
         raise Response({"detail": "User not found"}, status=404)
 
     profile_obj = query_set.first()
-    data = PublicProfileSerializer(instance=profile_obj)
+    data = PublicProfileSerializer(instance=profile_obj, context={"request": request})
     return Response(data.data, status=200)
 
 
