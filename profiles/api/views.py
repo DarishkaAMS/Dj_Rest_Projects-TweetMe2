@@ -20,6 +20,16 @@ ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 #     to_follow_user = ??
 #     return Response({}, status=200)
 
+@api_view(['GET'])
+def profile_detail_api_view(request, username, *args, **kwargs):
+    # get the profile for the passed username
+    query_set = Profile.objects.filter(user__username=username)
+    if not query_set.exists():
+        raise Response({"detail": "User not found"}, status=404)
+
+    profile_obj = query_set.first()
+    return Response({}, status=200)
+
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
