@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from ..forms import Profile
+from ..serializers import PublicProfileSerializer
 
 User = get_user_model()
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
@@ -28,7 +29,8 @@ def profile_detail_api_view(request, username, *args, **kwargs):
         raise Response({"detail": "User not found"}, status=404)
 
     profile_obj = query_set.first()
-    return Response({}, status=200)
+    data = PublicProfileSerializer(instance=profile_obj)
+    return Response(data.data, status=200)
 
 
 @api_view(['GET', 'POST'])
