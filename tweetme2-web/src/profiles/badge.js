@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
+import {apiProfileDetail} from './lookup'
+
 export function ProfileBadge (props) {
     const {username} = props
     const [didLookup, setDidLookup] = useState(false)
@@ -11,12 +13,10 @@ export function ProfileBadge (props) {
     }
     useEffect(() => {
         if (didLookup === false){
-            apiTweetDetail(tweetId, handleBackendLookup)
+            apiProfileDetail(username, handleBackendLookup)
             setDidLookup(true)
         }
-    }, [tweetId, didLookup, setDidLookup])
+    }, [username, didLookup, setDidLookup])
 
-    return tweet === null ? null : <Tweet tweet={tweet} className={props.className}/>
-}
-    return null
+    return profile ? <span> {profile.first_name} </span>
 }
