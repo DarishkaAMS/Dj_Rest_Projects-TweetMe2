@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import ProfileBadge from './profiles'
+import {ProfileBadge} from './profiles'
 import {FeedComponent, TweetsComponent, TweetDetailComponent} from './tweets'
 import reportWebVitals from './reportWebVitals';
 
