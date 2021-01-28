@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {ProfileBadge} from './profiles'
+import {ProfileBadgeComponent} from './profiles'
 import {FeedComponent, TweetsComponent, TweetDetailComponent} from './tweets'
 import reportWebVitals from './reportWebVitals';
 
@@ -36,7 +36,7 @@ const userProfileBadgeElement = document.querySelectorAll('.tweetme-2-profile-ba
 
 userProfileBadgeElement.forEach(container => {
     ReactDOM.render(
-        e(ProfileBadge, container.dataset), container);
+        e(ProfileBadgeComponent, container.dataset), container);
 })
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

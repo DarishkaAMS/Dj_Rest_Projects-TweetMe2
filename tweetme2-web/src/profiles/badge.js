@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import {apiProfileDetail} from './lookup'
 
-export function ProfileBadge (props) {
+export function ProfileBadgeComponent (props) {
     const {username} = props
     const [didLookup, setDidLookup] = useState(false)
     const [profile, setProfile] = useState(null)
