@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 
 import {apiProfileDetail} from './lookup'
+import {UserDisplay} from './components'
 
 function ProfileBadge(props) {
     const {user} = props
     console.log(user)
     return user ? <div>
-        <p> {user.first_name} {user.last_name} </p>
+        <p> <UserDisplay user={user} includeFullName/> </p>
         </div> : null
 }
 
