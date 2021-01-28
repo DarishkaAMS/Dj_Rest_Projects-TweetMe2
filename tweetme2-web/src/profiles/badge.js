@@ -4,7 +4,10 @@ import {apiProfileDetail} from './lookup'
 
 function ProfileBadge(props) {
     const {user} = props
-    return user ? <span>{user.first_name}</span> : null
+    console.log(user)
+    return user ? <div>
+        <p> {user.first_name} {user.last_name} </p>
+        </div> : null
 }
 
 export function ProfileBadgeComponent (props) {
@@ -22,5 +25,5 @@ export function ProfileBadgeComponent (props) {
             setDidLookup(true)
         }
     }, [username, didLookup, setDidLookup])
-    return didLookup === false ? "I am loading..." : profile ? <span>{profile.first_name} </span> : null
+    return didLookup === false ? "I am loading..." : profile ? <ProfileBadge user={profile} /> : null
     }
