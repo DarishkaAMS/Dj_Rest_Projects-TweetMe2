@@ -17,5 +17,5 @@ export function ProfileBadge (props) {
             setDidLookup(true)
         }
     }, [username, didLookup, setDidLookup])
-    return profile ? <span>{profile.first_name} </span> : null
+    return didLookup === false ? "I am loading..." : profile ? <span>{profile.first_name} </span> : null
     }
