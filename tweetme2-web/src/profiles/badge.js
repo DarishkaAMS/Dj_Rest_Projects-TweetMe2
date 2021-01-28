@@ -7,9 +7,13 @@ import {apiProfileDetail} from './lookup'
 function ProfileBadge(props) {
     const {user} = props
     console.log(user)
+    const handleFollowToggle = (event) => {
+        console.log(event)
+    }
     return user ? <div>
-    <UserPicture user={user} hidelink/>
-    <p> <UserDisplay user={user} includeFullName hidelink/> </p>
+        <UserPicture user={user} hidelink/>
+        <p> <UserDisplay user={user} includeFullName hidelink/> </p>
+        <button className='btn btn-primary' onClick={handleFollowToggle}> {user.is_following ? "Unfollow" : "Follow"} </button>
     </div> : null
 }
 
