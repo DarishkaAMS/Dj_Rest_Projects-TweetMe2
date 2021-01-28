@@ -8,6 +8,7 @@ function ProfileBadge(props) {
     const {user, didFollowToggle, profileLoading} = props
     console.log(user)
     let currentVerb = (user && user.is_following) ? "Unfollow" : "Follow"
+    currentVerb = profileLoading ? "I'm loading it..." : currentVerb
     const handleFollowToggle = (event) => {
         event.preventDefault()
         if (didFollowToggle && !profileLoading) {
