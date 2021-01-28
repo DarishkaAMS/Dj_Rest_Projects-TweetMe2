@@ -1,5 +1,5 @@
 import {backendLookup} from '../lookup'
 
-export function apiProfileDetail(tweetId, callback){
-    backendLookup('GET', `/tweets/${tweetId}/`, callback)
+export function apiProfileDetail(username, callback){
+    backendLookup('GET', `/profiles/${username}/`, callback)
 }
