@@ -6,7 +6,6 @@ import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 function ProfileBadge(props) {
     const {user, didFollowToggle, profileLoading} = props
-    console.log(user)
     let currentVerb = (user && user.is_following) ? "Unfollow" : "Follow"
     currentVerb = profileLoading ? "I'm loading it..." : currentVerb
     const handleFollowToggle = (event) => {
@@ -40,7 +39,14 @@ export function ProfileBadgeComponent (props) {
     }, [username, didLookup, setDidLookup])
 
     const handleNewFollow = (actionVerb) => {
-        console.log(actionVerb)
+        apiProfileFollowToggle(username, actionVerb, (response, status)=>{
+//            console.log(response, status)
+            if (status === 200){
+                setProfile(response)
+//                apiProfileDetail(username, handleBackendLookup)
+            }
+            setProfileLoading(false)
+        })
         setProfileLoading(true)
     }
     return didLookup === false ? "I am loading..." : profile ? <ProfileBadge user={profile} didFollowToggle={handleNewFollow} profileLoading={profileLoading}/> : null
