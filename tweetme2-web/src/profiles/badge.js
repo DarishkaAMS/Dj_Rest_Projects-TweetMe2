@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {UserDisplay, UserPicture} from './components'
-import {apiProfileDetail} from './lookup'
+import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 
 function ProfileBadge(props) {
@@ -38,9 +38,10 @@ export function ProfileBadgeComponent (props) {
             setDidLookup(true)
         }
     }, [username, didLookup, setDidLookup])
+
     const handleNewFollow = (actionVerb) => {
         console.log(actionVerb)
         setProfileLoading(true)
     }
-    return didLookup === false ? "I am loading..." : profile ? <ProfileBadge user={profile} didFollowToggle={handleNewFollow} profileLoading={profileLoading} /> : null
+    return didLookup === false ? "I am loading..." : profile ? <ProfileBadge user={profile} didFollowToggle={handleNewFollow} profileLoading={profileLoading}/> : null
     }
