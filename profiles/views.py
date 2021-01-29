@@ -46,7 +46,7 @@ def profile_detail_view(request, username, *args, **kwargs):
     is_following = False
     if request.user.is_authenticated:
         user = request.user
-        is_following = user in profile_obj.followers.ll()
+        is_following = user in profile_obj.followers.all()
         # is_following = profile_obj in user.following.ll()
     context = {
         "username": username,
