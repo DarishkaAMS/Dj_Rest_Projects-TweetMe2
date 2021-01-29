@@ -4,10 +4,10 @@ import React, {useEffect, useState} from 'react'
 import {UserDisplay, UserPicture} from './components'
 import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
-function DisplayCount(props) {
-    return <span className={props.className}>{numeral(props.children).format('0.0a')}</span>
-}
 
+function DisplayCount(props) {
+    return <span className={props.className}>{numeral(props.children).format("0a")}</span>
+}
 
 function ProfileBadge(props) {
     const {user, didFollowToggle, profileLoading} = props
@@ -22,8 +22,8 @@ function ProfileBadge(props) {
     return user ? <div>
         <UserPicture user={user} hidelink/>
         <p> <UserDisplay user={user} includeFullName hidelink/> </p>
-        <p> Followers: {numeral(user.follower_count).format('0.0a')} </p>
-        <p> Following: {user.following_count} </p>
+        <p> Followers: <DisplayCount> {user.follower_count} </DisplayCount></p>
+        <p> Following: <DisplayCount> {user.following_count} </DisplayCount></p>
         <button className='btn btn-primary' onClick={handleFollowToggle}> {currentVerb} </button>
     </div> : null
 }
